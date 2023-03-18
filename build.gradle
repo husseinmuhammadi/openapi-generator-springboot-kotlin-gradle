@@ -5,6 +5,8 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'org.jetbrains.kotlin.kapt' version '1.8.10'
+    id 'org.openapi.generator' version '6.0.1'
 }
 
 group = 'com.javastudio.openapi'
@@ -15,11 +17,42 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    main {
+        kotlin.srcDirs += "$buildDir/generated/open-api/src/main/kotlin"
+    }
+}
+
+openApiGenerate {
+    generatorName = 'kotlin-spring'
+    library = 'spring-boot'
+    inputSpec = "$rootDir/src/main/resources/open-api/server/order-units-oas.yaml" as String
+    outputDir = "$buildDir/generated/open-api" as String
+    packageName = 'com.javastudio.openapi.generated.v1'
+    apiPackage = 'com.javastudio.openapi.generated.v1.api'
+    modelPackage = 'com.javastudio.openapi.generated.v1.model'
+    invokerPackage = 'com.javastudio.openapi.generated.v1.invoker'
+    enablePostProcessFile = true
+    skipOverwrite = false
+    configOptions = [
+            interfaceOnly       : 'true',
+            enumPropertyNaming  : "original",
+            serializationLibrary: 'jackson',
+            dateLibrary         : 'java8'
+    ]
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly 'jakarta.annotation:jakarta.annotation-api:2.1.1'
+    implementation 'org.springdoc:springdoc-openapi-data-rest:1.6.13'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.6.13'
+    implementation 'org.springdoc:springdoc-openapi-kotlin:1.6.13'
+
 }
 
 tasks.withType(KotlinCompile) {
@@ -32,3 +65,6 @@ tasks.withType(KotlinCompile) {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+compileKotlin.dependsOn tasks.openApiGenerate
+compileTestKotlin.dependsOn tasks.openApiGenerate
