@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Order Unit Service API - OpenAPI 3.0
   description: OUMS Request Handler API
-  version: 1.0.2
+  version: 1.0.1
 servers:
   - url: https://oums.aks-mdm-dev.retail.ah.eu-int-aholddelhaize.com/ah/merchandising/order-units/v1
     description: Development
@@ -16,29 +16,10 @@ paths:
   /order-units:
     get:
       tags:
-        - Order Units
+        - Store Order Units
       summary: Populate a list of order units based on given parameters
-      description: Populate a list of order units based on given parameters, expected at least one parameters to be exists, retailItemId, supplierId or depotId
+      description: Populate a list of order units based on given parameters
       operationId: findAllOrderUnits
-      parameters:
-        - in: query
-          name: retailItemId
-          schema:
-            type: integer
-            format: int64
-          example: 439481
-        - in: query
-          name: supplierId
-          schema:
-            type: integer
-            format: int64
-          example: 248773
-        - in: query
-          name: depotId
-          schema:
-            type: integer
-            format: int64
-          example: 684571
       responses:
         200:
           description: A list of order units has been populated successfuly based on given parameters
@@ -47,11 +28,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/OrderUnit'
+                  $ref: '#/components/schemas/StoreOrderUnit'
   /order-units/{orderUnitId}:
     get:
       tags:
-        - Order Unit Details
+        - Store Order Unit Details
       summary: Retreive store order unit detials for given SOU ID
       description: Order Units with related Offers
       operationId: findOrderUnit
@@ -82,7 +63,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrderUnit'
+                $ref: '#/components/schemas/StoreOrderUnit'
         400:
           description: Wrong Parameters provided
           content:
@@ -106,7 +87,7 @@ paths:
         - apiKey: [ ]
 components:
   schemas:
-    OrderUnit:
+    StoreOrderUnit:
       type: object
       properties:
         id:
