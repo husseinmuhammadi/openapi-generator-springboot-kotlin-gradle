@@ -2,10 +2,8 @@ package com.javastudio.openapi.web.resources
 
 import com.javastudio.openapi.generated.v1.api.OrderUnitsApi
 import com.javastudio.openapi.generated.v1.model.OrderUnit
-import com.javastudio.openapi.generated.v1.model.StoreOrderUnit
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 
 @RestController
 class OrderUnitsResource : OrderUnitsApi {

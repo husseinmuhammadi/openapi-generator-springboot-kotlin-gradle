@@ -40,6 +40,10 @@ openApiGenerate {
             serializationLibrary: 'jackson',
             dateLibrary         : 'java8'
     ]
+    typeMappings = [
+            'OffsetDateTime': 'LocalDateTime',
+            'java.time.OffsetDateTime': 'java.time.LocalDateTime'
+    ]
 }
 
 dependencies {
