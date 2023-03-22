@@ -18,11 +18,7 @@ class OrderUnitsResource : OrderUnitsApi {
         return super.findAllOrderUnits(retailItemId, supplierId, depotId)
     }
 
-    override fun findOrderUnit(
-        orderUnitId: Int,
-        storeGroupId: String?,
-        refDate: LocalDate?
-    ): ResponseEntity<OrderUnit> {
-        return super.findOrderUnit(orderUnitId, storeGroupId, refDate)
+    override fun findOrderUnit(orderUnitId: Int): ResponseEntity<OrderUnit> {
+        return super.findOrderUnit(orderUnitId)
     }
 }

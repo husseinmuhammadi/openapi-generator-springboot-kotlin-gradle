@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Order Unit Service API - OpenAPI 3.0
   description: OUMS Request Handler API
-  version: 1.0.3
+  version: 1.0.2
 servers:
   - url: https://oums.aks-mdm-dev.retail.ah.eu-int-aholddelhaize.com/ah/merchandising/order-units/v1
     description: Development
@@ -23,21 +23,18 @@ paths:
       parameters:
         - in: query
           name: retailItemId
-          description: Find order units based on retial items
           schema:
             type: integer
             format: int64
           example: 439481
         - in: query
           name: supplierId
-          description: Find order units based on given supplier that provides the retail items
           schema:
             type: integer
             format: int64
           example: 248773
         - in: query
           name: depotId
-          description: Find order units based on given depotId
           schema:
             type: integer
             format: int64
@@ -64,6 +61,21 @@ paths:
           required: true
           schema:
             type: integer
+        - name: storeGroupId
+          in: query
+          description: StoreGroup Id for which price required
+          required: false
+          explode: true
+          schema:
+            type: string
+        - name: refDate
+          in: query
+          description: Retrieve all retail prices which are open/active status as of refDate
+          required: false
+          explode: true
+          schema:
+            type: string
+            format: date
       responses:
         200:
           description: successful operation
