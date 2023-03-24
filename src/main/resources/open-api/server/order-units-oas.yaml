@@ -342,7 +342,7 @@ components:
           nullable: true
           description: End Date of timeframe when Outer Packaging is valid
         unpackFlag:
-          type: string
+          type: boolean
           example: null
           nullable: true
           description: Indicator if SOU needs to be unpacked in DC
