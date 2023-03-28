@@ -11,9 +11,11 @@ class OrderUnitsResource : OrderUnitsApi {
     override fun findAllOrderUnits(
         retailItemId: Long?,
         supplierId: Long?,
-        depotId: Long?
+        depotId: Long?,
+        offset: Int?,
+        limit: Int?
     ): ResponseEntity<List<OrderUnit>> {
-        return super.findAllOrderUnits(retailItemId, supplierId, depotId)
+        return super.findAllOrderUnits(retailItemId, supplierId, depotId, offset, limit)
     }
 
     override fun findOrderUnit(orderUnitId: Int): ResponseEntity<OrderUnit> {

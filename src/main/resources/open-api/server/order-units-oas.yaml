@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Order Unit Service API - OpenAPI 3.0
   description: OUMS Request Handler API
-  version: 1.0.4
+  version: 1.0.5
 servers:
   - url: https://oums.aks-mdm-dev.retail.ah.eu-int-aholddelhaize.com/ah/merchandising/order-units/v1
     description: Development
@@ -44,6 +44,8 @@ paths:
             type: integer
             format: int64
           example: 684571
+        - $ref: '#/components/parameters/offsetParam'
+        - $ref: '#/components/parameters/limitParam'
       responses:
         200:
           description: A list of order units has been populated successfuly based on given parameters
@@ -95,6 +97,26 @@ paths:
       security:
         - apiKey: [ ]
 components:
+  parameters:
+    offsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip before returning the results.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 0
+    limitParam:
+      name: limit
+      in: query
+      description: Maximum number of items to return.
+      required: false
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 100
   schemas:
     OrderUnit:
       type: object
