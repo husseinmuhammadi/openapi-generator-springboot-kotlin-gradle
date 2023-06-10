@@ -1,4 +1,4 @@
-package com.javastudio.openapi.demo
+package com.javastudio.openapi
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
