@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Order Unit Service API - OpenAPI 3.0
   description: OUMS Request Handler API
@@ -346,9 +346,11 @@ components:
           example: 2011-10-07
           description: Start Date of timeframe when a supplier is active on a GTIN (to be able to deliver the GTIN)
         dateValidUntil:
-          type: string
-          format: date
-          nullable: true
+          type:
+            - string
+            - 'null'
+#          format: date
+#          nullable: true
           example: 2011-10-07
           description: End Date of timeframe when a supplier is active on a GTIN (to be able to deliver the GTIN)
         link:
